@@ -1,6 +1,8 @@
 # Environement variables
 
 .env
+.env.production
+.env.development
 
 # Debug log & node_modules
 

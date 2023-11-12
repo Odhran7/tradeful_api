@@ -1,6 +1,6 @@
 // This is the validator for the tradesperson model
 
-const validateTradesperson = (tradespersonData) => {
+const validate = (tradespersonData) => {
     const errors = [];
 
     // Required
@@ -21,5 +21,24 @@ const validateTradesperson = (tradespersonData) => {
         errors: errors
     };
 };
+
+const validateTradesperson = (userId, tradeType, businessName, skills, qulaifications) => {
+    const validationTradesperson = validate({
+        userId,
+        tradeType,
+        businessName,
+        skills,
+        qulaifications,
+    });
+
+    if (!validationTradesperson.isValid) {
+        logger.error(
+            `Validation failed User: ${validateTradesperson.errors.join(", ")}`
+        );
+        throw new Error(
+            `Validation failed User: ${validateTradesperson.errors.join(", ")}`
+        );
+    }
+}
 
 export default validateTradesperson;

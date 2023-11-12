@@ -1,7 +1,7 @@
 // This is the validaror for the homeowner model
 
 // Homeowner data validation function
-const validateHomeowner = (homeownerData) => {
+const validate = (homeownerData) => {
     const errors = [];
 
     // Required
@@ -38,5 +38,22 @@ const validateHomeowner = (homeownerData) => {
         errors: errors
     };
 };
+
+// This is a helper function for validating the homeowner model.
+const validateHomeowner = (userId, propertyDetails) => {
+    const validateHomeowner = validate({
+        userId,
+        propertyDetails
+    });
+
+    if (!validateHomeowner.isValid) {
+        logger.error(
+            `Validation failed User: ${validateHomeowner.errors.join(", ")}`
+        );
+        throw new Error(
+            `Validation failed User: ${validateHomeowner.errors.join(", ")}`
+        );
+    }
+}
 
 export default validateHomeowner;

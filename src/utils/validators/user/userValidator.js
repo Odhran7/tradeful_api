@@ -1,6 +1,6 @@
 import validator from 'validator';
 
-const validateUser = (userData) => {
+const validate = (userData) => {
     const errors = [];
 
     // Required
@@ -45,5 +45,26 @@ const validateUser = (userData) => {
         errors: errors
     };
 };
+
+// This is a helper function for validating the homeowner model.
+const validateUser = (firstName, lastName, phoneNumber, address, email, role, tradeType, businessName, skills, qulaifications) => {
+    const validationUser = validate({
+        firstName,
+        lastName,
+        phoneNumber,
+        address,
+        email,
+        role,
+    });
+
+    if (!validationUser.isValid) {
+        logger.error(
+            `Validation failed User: ${validationUser.errors.join(", ")}`
+        );
+        throw new Error(
+            `Validation failed User: ${validationUser.errors.join(", ")}`
+        );
+    }
+}
 
 export default validateUser;

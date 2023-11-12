@@ -1,18 +1,27 @@
-import admin from 'firebase-admin';
-import { readFileSync } from 'fs';
-import dotenv from 'dotenv';
+// import admin from 'firebase-admin';
+// import { readFileSync } from 'fs';
+// import dotenv from 'dotenv';
 
-dotenv.config();
+// dotenv.config();
 
-// Reading firebase key
+// async function loadFirebaseConfig() {
+//   const serviceAccountPath = process.env.FIREBASE_SERVICE_ACCOUNT_KEY_PATH;
+//   if (!serviceAccountPath) {
+//     throw new Error('FIREBASE_SERVICE_ACCOUNT_KEY_PATH is not set');
+//   }
+//   const serviceAccount = import(serviceAccountPath);
+//   admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount)
+//   });
+// }
 
-const serviceAccount = JSON.parse(readFileSync(process.env.FIREBASE_SERVICE_ACCOUNT_KEY_PATH, 'utf8'));
+// loadFirebaseConfig().catch(console.error);
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-});
+// // Reading firebase key
 
-const db = admin.firestore();
-const auth = admin.auth();
+// // const serviceAccount = JSON.parse(readFileSync(process.env.FIREBASE_SERVICE_ACCOUNT_KEY_PATH, 'utf8'));
 
-export { db, auth };
+// const db = admin.firestore();
+// const auth = admin.auth();
+
+// export { db, auth };

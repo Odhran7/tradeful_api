@@ -1,8 +1,8 @@
 // This is the export file for the models
 
-import HomeownerModel from './homeownerModel';
-import TradespersonModel from './tradespersonModel';
-import UserModel from './userModel';
+import HomeownerModel from './profiles/homeownerModel';
+import TradespersonModel from './profiles/tradespersonModel';
+import UserModel from './profiles/userModel';
 
 
 export {

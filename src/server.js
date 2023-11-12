@@ -2,7 +2,7 @@
 
 import express from 'express';
 import bodyParser from 'body-parser';
-import dotenv from 'dotenv';
+import dotenv from './config/index.js';
 import swaggerUi from 'swagger-ui-express';
 import { errorHandler } from './middleware/index.js';
 import {
@@ -12,9 +12,12 @@ import {
   register,
   limiter,
 } from './config/index.js';
+import connectDb from './config/database.js';
 
 dotenv.config();
 initMetrics();
+// Init DB
+connectDb();
 
 const app = express();
 const port = process.env.PORT || 3000;

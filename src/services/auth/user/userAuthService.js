@@ -1,8 +1,7 @@
 // This is the auth service for the user
 import admin from 'firebase-admin';
 import { validateUser } from '../../../utils/validators';
-import { registerHomeowner } from './homeownerAuthService';
-import UserModel from '../../../models/UserModel';
+import UserModel from '../../../models/profiles/userModel';
 import registerTradesperson from '../tradesperson/tradespersonAuthService';
 import registerHomeowner from '../homeowner/homeownerAuthService';
 import logger from '../../../config/logger';
