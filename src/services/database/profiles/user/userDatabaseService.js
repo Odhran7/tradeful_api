@@ -166,7 +166,11 @@ const updateUserById = async (userId, data) => {
 // Delete a user by ID
 const deleteUserById = async (userId) => {
   try {
-    const user = await UserModel.findByIdAndDelete(userId);
+    const user = await getUserById(userId);
+    if (user) {
+      await user.remove();
+      await UserModel.findByIdAndDelete(userId);
+    }
     return user;
   } catch (error) {
     logger.error('Error deleting user by ID: ' + error.message);

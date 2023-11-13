@@ -9,6 +9,8 @@ password,
 role
 */
 
+import HomeownerModel from "./homeownerModel.js";
+import TradespersonModel from "./tradespersonModel.js"
 import mongoose from "mongoose";
 
 const usersSchema = new mongoose.Schema({
@@ -55,6 +57,14 @@ const usersSchema = new mongoose.Schema({
     maxlength: 100,
   },
 });
+
+usersSchema.pre('remove', async function (next) {
+  const userId = this._id;
+  await HomeownerModel.deleteMany({ userId: userId });
+  await TradespersonModel.deleteMany({ userId: userId });
+  next();
+});
+
 
 const UserModel = mongoose.model('User', usersSchema);
 
