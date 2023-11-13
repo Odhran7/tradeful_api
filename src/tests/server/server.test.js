@@ -1,5 +1,6 @@
 import request from 'supertest';
 import app from '../../server';
+import mongoose from 'mongoose';
 
 // Test cases for critical endpoints 
 
@@ -14,4 +15,8 @@ describe('Server Endpoints', () => {
       expect(response.statusCode).toBe(404);
     });
   });
+
+afterAll(async () => {
+    await mongoose.connection.close();
+})
   

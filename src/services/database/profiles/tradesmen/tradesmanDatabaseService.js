@@ -1,13 +1,13 @@
 // This is the database service related to the tradesman model.
 
 import { validateTradesperson } from "../../../../utils/validators/index.js";
-import { TradespersonModel } from "../../../../models/profiles/index";
+import { TradespersonModel, UserModel } from "../../../../models/profiles/index";
 import { logger } from "../../../../config/index.js";
 
 // Helper function for creating a tradesman
 const createTradesperson = async (userId, tradeType, businessName, skills, qualifications) => {
     try {
-        validateHomeowner(userId, propertyDetails);
+        validateTradesperson(userId, tradeType, businessName, skills, qualifications);
         const tradesman = new TradespersonModel({userId, tradeType, businessName, skills, qualifications});
         await tradesman.save();
         return tradesman;
@@ -20,7 +20,7 @@ const createTradesperson = async (userId, tradeType, businessName, skills, quali
 // This function returns a tradesman by id
 const findTradespersonById = async (userId) => {
     try {
-        const tradesman = await TradespersonModel.findById(userId);
+        const tradesman = await TradespersonModel.findOne({userId});
         return tradesman;
     } catch (error) {
         logger.error("Error finding tradesman by id: " + error.message);
@@ -32,34 +32,24 @@ const findTradespersonById = async (userId) => {
 const updateTradespersonById = async (userId, tradeType, businessName, skills, qualifications) => {
     try {
         validateTradesperson(userId, tradeType, businessName, skills, qualifications);
-        const tradesman = await TradespersonModel.findByIdAndUpdate(userId, {
+        const tradesman = await findTradespersonById(userId);
+        const tradesmanId = tradesman._id;
+        const newTradesman = await TradespersonModel.findByIdAndUpdate(tradesmanId, {
             tradeType,
             businessName,
             skills,
             qualifications,
         });
-        return tradesman;
+        return newTradesman;
     } catch (error) {
         logger.error("Error updating tradesman by id: " + error.message);
         throw error;
     }
 }
 
-// This function deletes a tradesman by id
-const deleteTradespersonById = async (userId) => {
-    try {
-        const tradesman = await TradespersonModel.findByIdAndDelete(userId);
-        return tradesman;
-    } catch (error) {
-        logger.error("Error deleting tradesman by id: " + error.message);
-        throw error;
-    
-    }
-}
 
 export {
     createTradesperson,
     findTradespersonById,
     updateTradespersonById,
-    deleteTradespersonById,
 }

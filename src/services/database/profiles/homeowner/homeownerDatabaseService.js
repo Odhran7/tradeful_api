@@ -1,6 +1,6 @@
 // This is the database service related to the homeowner model.
 
-import { logger } from "handlebars";
+import { logger } from "../../../../config/index.js";
 import { validateHomeowner } from "../../../../utils/validators/index.js";
 import { HomeownerModel } from "../../../../models/profiles/index";
 
@@ -32,29 +32,20 @@ const findHomeownerById = async (userId) => {
 const updateHomeownerById = async (userId, propertyDetails) => {
     try {
         validateHomeowner(userId, propertyDetails);
-        const homeowner = await HomeownerModel.findByIdAndUpdate(userId, {
+        const homeowner = await findHomeownerById(userId);
+        const homeownerId = homeowner._id;
+        const newHomeowner = await HomeownerModel.findByIdAndUpdate(homeownerId, {
             propertyDetails,
         });
-        return homeowner;
+        return newHomeowner;
     } catch (error) {
         logger.error("Error updating homeowner by id: " + error.message);
         throw error;   
     }
 }
 
-// This function deletes a homeowner by id
-const deleteHomeownerById = async (userId) => {
-    try {
-        const homeowner = await HomeownerModel.findByIdAndDelete(userId);
-        return homeowner;
-    } catch (error) {
-        logger.error("Error deleting homeowner by id: " + error.message);
-        throw error;
-    }
-}
 export {
     createHomeowner,
     findHomeownerById,
     updateHomeownerById,
-    deleteHomeownerById,
 }

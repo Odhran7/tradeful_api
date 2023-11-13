@@ -1,10 +1,10 @@
 // This is the validator for the tradesperson model
+import { logger } from "../../../config/index.js";
 
 const validate = (tradespersonData) => {
     const errors = [];
-
     // Required
-    const requiredFields = ['userId', 'tradeType'];
+    const requiredFields = ['userId', 'tradeType', 'businessName', 'skills', 'qualifications'];
     requiredFields.forEach(field => {
         if (!tradespersonData[field]) {
             errors.push(`${field} is required`);
@@ -22,21 +22,21 @@ const validate = (tradespersonData) => {
     };
 };
 
-const validateTradesperson = (userId, tradeType, businessName, skills, qulaifications) => {
+const validateTradesperson = (userId, tradeType, businessName, skills, qualifications) => {
     const validationTradesperson = validate({
         userId,
         tradeType,
         businessName,
         skills,
-        qulaifications,
+        qualifications,
     });
 
     if (!validationTradesperson.isValid) {
         logger.error(
-            `Validation failed User: ${validateTradesperson.errors.join(", ")}`
+            `Validation failed Tradesperson: ${validationTradesperson.errors.join(", ")}`
         );
         throw new Error(
-            `Validation failed User: ${validateTradesperson.errors.join(", ")}`
+            `Validation failed Tradesperson: ${validationTradesperson.errors.join(", ")}`
         );
     }
 }

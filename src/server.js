@@ -2,7 +2,7 @@
 
 import express from 'express';
 import bodyParser from 'body-parser';
-import dotenv from './config/index.js';
+import dotenv from './config/envConfig.js';
 import swaggerUi from 'swagger-ui-express';
 import { errorHandler } from './middleware/index.js';
 import {
@@ -14,7 +14,6 @@ import {
 } from './config/index.js';
 import connectDb from './config/database.js';
 
-dotenv.config();
 initMetrics();
 // Init DB
 connectDb();

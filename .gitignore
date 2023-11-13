@@ -12,3 +12,6 @@ logs/
 # Keys
 
 keys/
+
+# Vscode plugins
+.vsCodeCounter

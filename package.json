@@ -11,7 +11,8 @@
     "format": "prettier --write .",
     "test": "jest --detectOpenHandles",
     "start-mongo": "mongod --dbpath \"C:/MongoDBFiles/data/db\"",
-    "mongo-shell": "mongosh \"mongodb://localhost:27017\""
+    "mongo-shell": "mongosh \"mongodb://localhost:27017\"",
+    "reset-db": "node src/scripts/database/resetDb.js"
   },
   "author": "Odhran Russell",
   "license": "MIT",

@@ -4,13 +4,11 @@ import {
   createTradesperson,
   findTradespersonById,
   updateTradespersonById,
-  deleteTradespersonById,
 } from './profiles/tradesmen/tradesmanDatabaseService';
 import {
     createHomeowner,
     findHomeownerById,
     updateHomeownerById,
-    deleteHomeownerById,
 } from './profiles/homeowner/homeownerDatabaseService';
 import {
     createHomeownerUser,
@@ -18,6 +16,11 @@ import {
     deleteUserById,
     getUserById,
     updateUserById,
+    getUserByEmail,
+    checkEmail,
+    checkPhoneNumber,
+    checkFirstLastName,
+    checkUserCanBeRegistered,
 } from './profiles/user/userDatabaseService';
 
 
@@ -25,14 +28,17 @@ export {
     createTradesperson,
     findTradespersonById,
     updateTradespersonById,
-    deleteTradespersonById,
     createHomeowner,
     findHomeownerById,
     updateHomeownerById,
-    deleteHomeownerById,
     createHomeownerUser,
     createTradespersonUser,
     deleteUserById,
     getUserById,
     updateUserById,
+    getUserByEmail,
+    checkEmail,
+    checkPhoneNumber,
+    checkFirstLastName,
+    checkUserCanBeRegistered,
 }

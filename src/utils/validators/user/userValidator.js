@@ -1,4 +1,5 @@
 import validator from 'validator';
+import { logger } from '../../../config/index.js';
 
 const validate = (userData) => {
     const errors = [];
@@ -23,7 +24,6 @@ const validate = (userData) => {
             minLowercase: 1,
             minUppercase: 1,
             minNumbers: 1,
-            minSymbols: 1
         })) {
             errors.push('Password does not meet strength requirements (min. 8 characters, including a mix of upper and lower case letters, numbers, and symbols)');
         }
@@ -47,13 +47,14 @@ const validate = (userData) => {
 };
 
 // This is a helper function for validating the homeowner model.
-const validateUser = (firstName, lastName, phoneNumber, address, email, role, tradeType, businessName, skills, qulaifications) => {
+const validateUser = (firstName, lastName, phoneNumber, address, email, password, role) => {
     const validationUser = validate({
         firstName,
         lastName,
         phoneNumber,
         address,
         email,
+        password,
         role,
     });
 

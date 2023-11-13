@@ -45,13 +45,13 @@ const usersSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    minlength: 10,
+    minlength: 8,
     maxlength: 100,
   },
   role: {
     type: String,
     required: true,
-    minlength: 10,
+    minlength: 5,
     maxlength: 100,
   },
 });
