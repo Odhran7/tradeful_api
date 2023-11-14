@@ -58,14 +58,6 @@ const usersSchema = new mongoose.Schema({
   },
 });
 
-usersSchema.pre('remove', async function (next) {
-  const userId = this._id;
-  await HomeownerModel.deleteMany({ userId: userId });
-  await TradespersonModel.deleteMany({ userId: userId });
-  next();
-});
-
-
 const UserModel = mongoose.model('User', usersSchema);
 
 export default UserModel;

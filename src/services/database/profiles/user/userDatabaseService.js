@@ -1,5 +1,5 @@
 // This is the database schema related to the user model.
-import { UserModel } from '../../../../models/profiles/index.js';
+import { UserModel, HomeownerModel, TradespersonModel } from '../../../../models/profiles/index.js';
 import { logger } from '../../../../config/index.js';
 import hashPassword from '../../../../utils/auth/hash.js';
 import { validateUser } from '../../../../utils/validators/index.js';
@@ -168,7 +168,8 @@ const deleteUserById = async (userId) => {
   try {
     const user = await getUserById(userId);
     if (user) {
-      await user.remove();
+      await HomeownerModel.deleteMany({ userId: userId });
+      await TradespersonModel.deleteMany({ userId: userId });
       await UserModel.findByIdAndDelete(userId);
     }
     return user;
