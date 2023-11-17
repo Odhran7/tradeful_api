@@ -1,7 +1,7 @@
 // This is a unit test for the database connection
 
 import mongoose from 'mongoose';
-import dotenv from '../../config/envConfig';
+import dotenv from '../../../config/envConfig';
 
 
 describe('Database Connection', () => {

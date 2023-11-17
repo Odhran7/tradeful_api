@@ -1,27 +1,29 @@
-// import admin from 'firebase-admin';
-// import { readFileSync } from 'fs';
-// import dotenv from 'dotenv';
+import admin from 'firebase-admin';
+import { readFileSync } from 'fs';
+import dotenv from './envConfig.js';
 
-// dotenv.config();
+function loadFirebaseConfig() {
+  const serviceAccountPath = process.env.FIREBASE_SERVICE_ACCOUNT_KEY_PATH;
+  if (!serviceAccountPath) {
+    throw new Error('FIREBASE_SERVICE_ACCOUNT_KEY_PATH is not set');
+  }
 
-// async function loadFirebaseConfig() {
-//   const serviceAccountPath = process.env.FIREBASE_SERVICE_ACCOUNT_KEY_PATH;
-//   if (!serviceAccountPath) {
-//     throw new Error('FIREBASE_SERVICE_ACCOUNT_KEY_PATH is not set');
-//   }
-//   const serviceAccount = import(serviceAccountPath);
-//   admin.initializeApp({
-//   credential: admin.credential.cert(serviceAccount)
-//   });
-// }
+  // Synchronously reading the service account JSON file
+  let serviceAccount;
+  try {
+    const serviceAccountFile = readFileSync(serviceAccountPath, 'utf8');
+    serviceAccount = JSON.parse(serviceAccountFile);
+  } catch (error) {
+    throw new Error('Failed to load Firebase service account file: ' + error.message);
+  }
 
-// loadFirebaseConfig().catch(console.error);
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+  });
+}
 
-// // Reading firebase key
+loadFirebaseConfig();
 
-// // const serviceAccount = JSON.parse(readFileSync(process.env.FIREBASE_SERVICE_ACCOUNT_KEY_PATH, 'utf8'));
+const messaging = admin.messaging();
 
-// const db = admin.firestore();
-// const auth = admin.auth();
-
-// export { db, auth };
+export { messaging };

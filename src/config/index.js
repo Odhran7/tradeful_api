@@ -5,6 +5,7 @@ import swaggerDocs from './swagger.js';
 import  { register, initMetrics } from './metrics.js';
 import limiter from './limiter.js';
 import dotenv from './envConfig.js';
+import { messaging } from './firebaseConfig.js';
 
 
 export {
@@ -14,4 +15,5 @@ export {
     initMetrics,
     limiter,
     dotenv,
+    messaging,
 }

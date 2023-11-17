@@ -1,7 +1,7 @@
 // This util hashes a password using bcryptjs.
 
 import bcrypt from 'bcryptjs';
-import { logger } from '../../config';
+import { logger } from '../../config/index.js';
 
 // Hashes password with salt 10
 const hashPassword = async (password) => {

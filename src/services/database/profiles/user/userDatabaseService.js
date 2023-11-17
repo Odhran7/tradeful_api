@@ -3,8 +3,7 @@ import { UserModel, HomeownerModel, TradespersonModel } from '../../../../models
 import { logger } from '../../../../config/index.js';
 import hashPassword from '../../../../utils/auth/hash.js';
 import { validateUser } from '../../../../utils/validators/index.js';
-import { createHomeowner } from '../homeowner/homeownerDatabaseService.js';
-import { createTradesperson } from '../tradesmen/tradesmanDatabaseService.js';
+import  { tradesmanDatabaseService, homeownerDatabaseService } from '../../../database/index.js';
 
 // Create Homeowner User
 const createHomeownerUser = async (data) => {
@@ -51,7 +50,7 @@ const createHomeownerUser = async (data) => {
     await user.save();
     const userId = user._id;
 
-    const homeowner = await createHomeowner(userId, propertyDetails);
+    const homeowner = await homeownerDatabaseService.createHomeowner(userId, propertyDetails);
     return { user, homeowner };
 
   } catch (error) {
@@ -107,7 +106,7 @@ const createTradespersonUser = async (data) => {
     });
     await user.save();
     const userId = user._id;
-    const tradesman = await createTradesperson(
+    const tradesman = await tradesmanDatabaseService.createTradesperson(
       userId.toString(),
       tradeType,
       businessName,
@@ -252,7 +251,37 @@ const checkUserCanBeRegistered = async (
   return false;
 };
 
-export {
+// This function updates the fcm token for a user
+const updateFcmToken = async (userId, fcmToken) => {
+  try {
+    const user = await getUserById(userId);
+    if (user) {
+      const updatedUser = await UserModel.findByIdAndUpdate(userId, { fcmToken: fcmToken })
+      return updatedUser;
+    }
+  } catch (error) {
+    logger.error('Error updating fcm token: ' + error.message);
+    throw error;
+  }
+}
+
+// Gets the FCM token for a user 
+const getFcmToken = async (userId) => {
+  try {
+    const user = await getUserById(userId);
+    if (user) {
+      const fcmToken = user.fcmToken;
+      return fcmToken;
+    } else {
+      throw new Error('User not found');
+    }
+  } catch (error) {
+    logger.error('Error getting fcm token: ' + error.message);
+    throw error;
+  }
+}
+
+const userDatabaseService = {
   createHomeownerUser,
   createTradespersonUser,
   deleteUserById,
@@ -263,4 +292,8 @@ export {
   checkPhoneNumber,
   checkFirstLastName,
   checkUserCanBeRegistered,
+  updateFcmToken,
+  getFcmToken,
 };
+
+export default userDatabaseService;

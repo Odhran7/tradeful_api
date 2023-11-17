@@ -1,12 +1,7 @@
 // These are the unit tests for the homeowner database service.
 
-import {
-  createHomeownerUser,
-  findHomeownerById,
-  updateHomeownerById,
-  deleteUserById,
-} from '../../../services/database/index';
-import dotenv from '../../../config/envConfig';
+import { userDatabaseService, homeownerDatabaseService } from '../../../../services/database/index.js';
+import dotenv from '../../../../config/envConfig';
 import mongoose from 'mongoose';
 
 beforeAll(async () => {
@@ -38,7 +33,7 @@ describe('Update a homeowner by ID', () => {
         isBusiness: false,
       },
     };
-    const obj = await createHomeownerUser(userData);
+    const obj = await userDatabaseService.createHomeownerUser(userData);
 
     const newUser = obj.user;
     const homeowner = obj.homeowner;
@@ -46,10 +41,10 @@ describe('Update a homeowner by ID', () => {
     const userId = newUser._id;
     expect(userId).toBeDefined();
     expect(homeowner._id).toBeDefined();
-    const updatedHomeowner = await findHomeownerById(userId.toString());
+    const updatedHomeowner = await homeownerDatabaseService.findHomeownerById(userId.toString());
     expect(updatedHomeowner.userId).toEqual(userId);
     // Delete the user
-    await deleteUserById(newUser._id);
+    await userDatabaseService.deleteUserById(newUser._id);
   });
 });
 
@@ -71,7 +66,7 @@ describe("Update a homeowner's details by ID", () => {
         isBusiness: false,
       },
     };
-    const obj = await createHomeownerUser(userData);
+    const obj = await userDatabaseService.createHomeownerUser(userData);
     const newUser = obj.user;
     const homeowner = obj.homeowner;
 
@@ -84,12 +79,12 @@ describe("Update a homeowner's details by ID", () => {
       location: 'Dublin 2',
       isBusiness: true,
     };
-    const updatedHomeowner = await updateHomeownerById(
+    const updatedHomeowner = await homeownerDatabaseService.updateHomeownerById(
       userId.toString(),
       updatedHomeownerData
     );
     expect(updatedHomeowner.userId).toEqual(userId);
     // Delete the user
-    await deleteUserById(newUser._id);
+    await userDatabaseService.deleteUserById(newUser._id);
   });
 });

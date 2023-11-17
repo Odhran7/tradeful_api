@@ -1,44 +1,13 @@
 // This is the export file for the database service.
 
-import {
-  createTradesperson,
-  findTradespersonById,
-  updateTradespersonById,
-} from './profiles/tradesmen/tradesmanDatabaseService';
-import {
-    createHomeowner,
-    findHomeownerById,
-    updateHomeownerById,
-} from './profiles/homeowner/homeownerDatabaseService';
-import {
-    createHomeownerUser,
-    createTradespersonUser,
-    deleteUserById,
-    getUserById,
-    updateUserById,
-    getUserByEmail,
-    checkEmail,
-    checkPhoneNumber,
-    checkFirstLastName,
-    checkUserCanBeRegistered,
-} from './profiles/user/userDatabaseService';
-
+import tradesmanDatabaseService from './profiles/tradesmen/tradesmanDatabaseService.js';
+import homeownerDatabaseService from './profiles/homeowner/homeownerDatabaseService.js';
+import userDatabaseService from './profiles/user/userDatabaseService.js';
+import bookingDatabaseService from './booking/bookingDbService.js';
 
 export {
-    createTradesperson,
-    findTradespersonById,
-    updateTradespersonById,
-    createHomeowner,
-    findHomeownerById,
-    updateHomeownerById,
-    createHomeownerUser,
-    createTradespersonUser,
-    deleteUserById,
-    getUserById,
-    updateUserById,
-    getUserByEmail,
-    checkEmail,
-    checkPhoneNumber,
-    checkFirstLastName,
-    checkUserCanBeRegistered,
+    tradesmanDatabaseService,
+    homeownerDatabaseService,
+    userDatabaseService,
+    bookingDatabaseService,
 }

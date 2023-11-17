@@ -1,5 +1,4 @@
 // This is the validaror for the homeowner model
-import { error } from 'winston';
 import { logger } from '../../../config/index.js';
 
 // Homeowner data validation function

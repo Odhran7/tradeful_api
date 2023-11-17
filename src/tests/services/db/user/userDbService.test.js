@@ -1,13 +1,7 @@
 // This is a unit test for the database connection for the users table
 
-import {
-  createHomeownerUser,
-  createTradespersonUser,
-  getUserById,
-  updateUserById,
-  deleteUserById,
-} from '../../../services/database/index';
-import dotenv from '../../../config/envConfig';
+import { userDatabaseService } from '../../../../services/database/index.js';
+import dotenv from '../../../../config/envConfig';
 import mongoose from 'mongoose';
 
 beforeAll(async () => {
@@ -40,16 +34,16 @@ describe('Create a Homeowner user', () => {
       },
     };
 
-    const obj = await createHomeownerUser(userData);
+    const obj = await userDatabaseService.createHomeownerUser(userData);
     const newUser = obj.user;
     const homeowner = obj.homeowner;
 
     expect(newUser._id).toBeDefined();
     expect(homeowner._id).toBeDefined();
     // Delete the user
-    await deleteUserById(newUser._id);
+    await userDatabaseService.deleteUserById(newUser._id);
   });
-});
+}); 
 
 // Create Tradesperson user test
 describe('Create a tradesperson user', () => {
@@ -67,7 +61,7 @@ describe('Create a tradesperson user', () => {
       skills: ['plumbing', 'electrical'],
       qualifications: ['plumbing', 'electrical'],
     };
-    const obj = await createTradespersonUser(userData);
+    const obj = await userDatabaseService.createTradespersonUser(userData);
 
     const newUser = obj.user;
     const tradesman = obj.tradesman;
@@ -75,7 +69,7 @@ describe('Create a tradesperson user', () => {
     expect(newUser._id).toBeDefined();
     expect(tradesman._id).toBeDefined();
     // Delete the user
-    await deleteUserById(newUser._id);
+    await userDatabaseService.deleteUserById(newUser._id);
   });
 });
 
@@ -97,16 +91,16 @@ describe('Get User By ID', () => {
         isBusiness: false,
       },
     };
-    const obj = await createHomeownerUser(userData);
+    const obj = await userDatabaseService.createHomeownerUser(userData);
     const newUser = obj.user;
     const homeowner = obj.homeowner;
     const userId = newUser._id;
-    const user = await getUserById(userId);
+    const user = await userDatabaseService.getUserById(userId);
     expect(user).toBeDefined();
     expect(homeowner._id).toBeDefined();
     expect(user._id).toEqual(userId);
     // Delete the user
-    await deleteUserById(userId);
+    await userDatabaseService.deleteUserById(userId);
   });
 });
 
@@ -128,7 +122,7 @@ describe('Update User By ID', () => {
         isBusiness: false,
       },
     };
-    const obj = await createHomeownerUser(userData);
+    const obj = await userDatabaseService.createHomeownerUser(userData);
     const newUser = obj.user;
     const homeowner = obj.homeowner;
 
@@ -143,12 +137,12 @@ describe('Update User By ID', () => {
       password: 'Password123!',
       role: 'homeowner',
     };
-    await updateUserById(userId, updatedData);
+    await userDatabaseService.updateUserById(userId, updatedData);
 
-    const updatedUser = await getUserById(userId);
+    const updatedUser = await userDatabaseService.getUserById(userId);
     expect(updatedUser).toBeDefined();
     // Delete the user
-    await deleteUserById(userId);
+    await userDatabaseService.deleteUserById(userId);
   });
 });
 
@@ -170,14 +164,14 @@ describe('Delete User By ID', () => {
         isBusiness: false,
       },
     };
-    const obj = await createHomeownerUser(userData);
+    const obj = await userDatabaseService.createHomeownerUser(userData);
 
     const newUser = obj.user;
     const homeowner = obj.homeowner;
 
     const userId = newUser._id;
-    await deleteUserById(userId);
-    const deletedUser = await getUserById(userId);
+    await userDatabaseService.deleteUserById(userId);
+    const deletedUser = await userDatabaseService.getUserById(userId);
     expect(deletedUser).toBeNull();
   });
 });
@@ -217,16 +211,16 @@ describe('Prevent duplicate users', () => {
       },
     };
 
-    const obj = await createHomeownerUser(newUserOneData);
+    const obj = await userDatabaseService.createHomeownerUser(newUserOneData);
     const newUserOne = obj.user;
 
     const newUserOneId = newUserOne._id;
     expect(newUserOneId).toBeDefined();
     await expect(async () => {
-      await createHomeownerUser(newUserTwoData);
+      await userDatabaseService.createHomeownerUser(newUserTwoData);
     }).rejects.toThrow('User already exists');
 
     // Delete the user
-    await deleteUserById(newUserOneId);
+    await userDatabaseService.deleteUserById(newUserOneId);
   });
 });

@@ -1,8 +1,8 @@
 // This is the config file for the database.
 
-import dotenv from './envConfig';
+import dotenv from './envConfig.js';
 import mongoose from 'mongoose';
-import logger from './logger';
+import logger from './logger.js';
 
 
 const connectDB = async () => {

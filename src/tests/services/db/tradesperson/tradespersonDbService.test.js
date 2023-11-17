@@ -1,12 +1,7 @@
 // These are the unit tests for the homeowner database service.
 
-import {
-  createTradespersonUser,
-  findTradespersonById,
-  updateTradespersonById,
-  deleteUserById,
-} from '../../../services/database/index';
-import dotenv from '../../../config/envConfig';
+import { tradesmanDatabaseService, userDatabaseService } from '../../../../services/database/index';
+import dotenv from '../../../../config/envConfig';
 import mongoose from 'mongoose';
 
 beforeAll(async () => {
@@ -36,18 +31,18 @@ describe('Find a tradesperson by ID', () => {
       skills: ['plumbing', 'electrical'],
       qualifications: ['plumbing', 'electrical'],
     };
-    const obj = await createTradespersonUser(userData);
+    const obj = await userDatabaseService.createTradespersonUser(userData);
 
     const newUser = obj.user;
     const tradesman = obj.tradesman;
 
     const userId = tradesman.userId;
     expect(userId).toBeDefined();
-    const tradesperson = await findTradespersonById(userId.toString());
+    const tradesperson = await tradesmanDatabaseService.findTradespersonById(userId.toString());
     const tradespersonId = tradesperson.userId;
     expect(tradesperson.userId).toEqual(userId);
     // Delete the user
-    await deleteUserById(newUser._id);
+    await userDatabaseService.deleteUserById(newUser._id);
   });
 });
 
@@ -67,7 +62,7 @@ describe("Update a tradesperson's details by ID", () => {
       skills: ['plumbing', 'electrical'],
       qualifications: ['plumbing', 'electrical'],
     };
-    const obj = await createTradespersonUser(userData);
+    const obj = await userDatabaseService.createTradespersonUser(userData);
 
     const newUser = obj.user;
     const tradesman = obj.tradesman;
@@ -80,7 +75,7 @@ describe("Update a tradesperson's details by ID", () => {
       skills: ['electrical'],
       qualifications: ['electrical'],
     };
-    const updatedTradesperson = await updateTradespersonById(
+    const updatedTradesperson = await tradesmanDatabaseService.updateTradespersonById(
       userId.toString(),
         updatedTradesPersonData.tradeType,
         updatedTradesPersonData.businessName,
@@ -90,7 +85,7 @@ describe("Update a tradesperson's details by ID", () => {
     expect(updatedTradesperson.userId).toEqual(userId);
 
     // Delete the user
-    await deleteUserById(newUser._id);
+    await userDatabaseService.deleteUserById(newUser._id);
   });
 });
 

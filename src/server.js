@@ -14,6 +14,10 @@ import {
 } from './config/index.js';
 import connectDb from './config/database.js';
 
+// Routes 
+
+import apiRoutes from './routes/user/index.js';
+
 initMetrics();
 // Init DB
 connectDb();
@@ -45,6 +49,9 @@ app.get('/metrics', async (req, res) => {
 app.get('/', (req, res) => {
   res.status(200).send('Welcome to the Tradeful API!');
 });
+
+// Routes
+app.use('/api', apiRoutes);
 
 if (process.env.NODE_ENV !== 'test') {
   app.listen(port, () => {

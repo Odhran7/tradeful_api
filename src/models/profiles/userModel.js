@@ -56,6 +56,10 @@ const usersSchema = new mongoose.Schema({
     minlength: 5,
     maxlength: 100,
   },
+  fcmToken: {
+    type: String, 
+    default: null 
+  }
 });
 
 const UserModel = mongoose.model('User', usersSchema);
