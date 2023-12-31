@@ -1,1 +1,1 @@
-// This is the export file fo the auth services
+// This is the export file for the local auth services

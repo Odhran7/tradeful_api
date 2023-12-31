@@ -1,10 +1,10 @@
 // This is the auth service for the user
 import admin from 'firebase-admin';
-import { validateUser } from '../../../utils/validators';
-import UserModel from '../../../models/profiles/userModel';
+import { validateUser } from '../../../../utils/validators';
+import UserModel from '../../../../models/profiles/userModel';
 import registerTradesperson from '../tradesperson/tradespersonAuthService';
 import registerHomeowner from '../homeowner/homeownerAuthService';
-import logger from '../../../config/logger';
+import logger from '../../../../config/logger';
 // Registers a new user as a homeowner
 const registerUserHomeOwner = async (data) => {
   try {

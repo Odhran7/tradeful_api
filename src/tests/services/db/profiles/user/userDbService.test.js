@@ -1,7 +1,7 @@
 // This is a unit test for the database connection for the users table
 
-import { userDatabaseService } from '../../../../services/database/index.js';
-import dotenv from '../../../../config/envConfig';
+import { userDatabaseService } from '../../../../../services/database/index.js';
+import dotenv from '../../../../../config/envConfig.js';
 import mongoose from 'mongoose';
 
 beforeAll(async () => {

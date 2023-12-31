@@ -1,7 +1,7 @@
 // These are the unit tests for the homeowner database service.
 
-import { userDatabaseService, homeownerDatabaseService } from '../../../../services/database/index.js';
-import dotenv from '../../../../config/envConfig';
+import { userDatabaseService, homeownerDatabaseService } from '../../../../../services/database/index.js';
+import dotenv from '../../../../../config/envConfig.js';
 import mongoose from 'mongoose';
 
 beforeAll(async () => {

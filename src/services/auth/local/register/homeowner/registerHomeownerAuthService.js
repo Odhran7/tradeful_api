@@ -1,6 +1,6 @@
 // These are the services for the homeowner authentication
-import { HomeownerModel } from '../../../models';
-import { validateHomeowner } from '../../../utils/validators';
+import { HomeownerModel } from '../../../../models';
+import { validateHomeowner } from '../../../../utils/validators';
 
 // Creates a new homeowner
 const registerHomeowner = async (userId, data) => {

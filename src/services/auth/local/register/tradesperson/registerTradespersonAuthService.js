@@ -1,7 +1,7 @@
 // These are the services for the tradesperson authentication
 
-import TradespersonModel from '../../../models/profiles/tradespersonModel';
-import { validateTradesperson } from '../../../utils/validators';
+import TradespersonModel from '../../../../models/profiles/tradespersonModel';
+import { validateTradesperson } from '../../../../utils/validators';
 
 // Creates a new tradesperson
 const registerTradesperson = async (userId, data) => {

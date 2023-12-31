@@ -3,7 +3,7 @@ import { UserModel, HomeownerModel, TradespersonModel } from '../../../../models
 import { logger } from '../../../../config/index.js';
 import hashPassword from '../../../../utils/auth/hash.js';
 import { validateUser } from '../../../../utils/validators/index.js';
-import  { tradesmanDatabaseService, homeownerDatabaseService } from '../../../database/index.js';
+import { tradesmanDatabaseService, homeownerDatabaseService } from '../../../database/index.js';
 
 // Create Homeowner User
 const createHomeownerUser = async (data) => {
@@ -113,7 +113,7 @@ const createTradespersonUser = async (data) => {
       skills,
       qualifications
     );
-    return { user: user, tradesman: tradesman};
+    return { user: user, tradesman: tradesman };
   } catch (error) {
     logger.error('Error creating homeowner user: ' + error.message);
     throw error;
@@ -185,6 +185,17 @@ const getUserByEmail = async (email) => {
     return user;
   } catch (error) {
     logger.error('Error getting user by email: ' + error.message);
+    throw error;
+  }
+};
+
+// Function retrieves a user by phoneNumber
+const getUserByPhoneNumber = async (phoneNumber) => {
+  try {
+    const user = await UserModel.findOne({ phoneNumber });
+    return user;
+  } catch (error) {
+    logger.error('Error getting user by phoneNumber: ' + error.message);
     throw error;
   }
 };
@@ -288,6 +299,7 @@ const userDatabaseService = {
   getUserById,
   updateUserById,
   getUserByEmail,
+  getUserByPhoneNumber,
   checkEmail,
   checkPhoneNumber,
   checkFirstLastName,

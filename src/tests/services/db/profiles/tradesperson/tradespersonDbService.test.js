@@ -1,7 +1,7 @@
 // These are the unit tests for the homeowner database service.
 
-import { tradesmanDatabaseService, userDatabaseService } from '../../../../services/database/index';
-import dotenv from '../../../../config/envConfig';
+import { tradesmanDatabaseService, userDatabaseService } from '../../../../../services/database/index';
+import dotenv from '../../../../../config/envConfig';
 import mongoose from 'mongoose';
 
 beforeAll(async () => {
@@ -25,7 +25,7 @@ describe('Find a tradesperson by ID', () => {
       address: '123 Main Street',
       email: 'russell.odhran@gmail.com',
       password: 'Password123!',
-      role: 'homeowner',
+      role: 'tradesperson',
       tradeType: 'plumber',
       businessName: 'John Doe Plumbing',
       skills: ['plumbing', 'electrical'],
