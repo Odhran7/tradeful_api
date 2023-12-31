@@ -1,7 +1,10 @@
 // This is the export file for the auth services
 
-import localAuthServices from "./local/index.js";
+import { loginUserEmail, loginUserPhoneNumber, registerHomeOwnerService, registerTradespersonService } from "./local/index.js";
 
 export {
-    localAuthServices,
-}
+    loginUserEmail,
+    loginUserPhoneNumber,
+    registerHomeOwnerService,
+    registerTradespersonService,
+};

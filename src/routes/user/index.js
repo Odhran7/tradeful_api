@@ -3,9 +3,9 @@ import tradesmanRouter from './tradesman/tradesmanRoutes.js';
 import userRouter from './user/userRoutes.js';
 import express from 'express';
 
-const apiRoutes = express.Router();
-apiRoutes.use('/homeowner', homeownerRoutes);
-apiRoutes.use('/tradesman', tradesmanRouter);
-apiRoutes.use('/user', userRouter);
+const profileRoutes = express.Router();
+profileRoutes.use('/homeowner', homeownerRoutes);
+profileRoutes.use('/tradesman', tradesmanRouter);
+profileRoutes.use('/user', userRouter);
 
-export default apiRoutes;
+export default profileRoutes;

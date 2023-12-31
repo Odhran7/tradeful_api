@@ -16,7 +16,7 @@ import connectDb from './config/database.js';
 
 // Routes 
 
-import apiRoutes from './routes/user/index.js';
+import apiRoutes from './routes/index.js';
 
 initMetrics();
 // Init DB
