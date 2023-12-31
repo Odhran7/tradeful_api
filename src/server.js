@@ -19,6 +19,7 @@ import connectDb from './config/database.js';
 import apiRoutes from './routes/index.js';
 
 initMetrics();
+
 // Init DB
 connectDb();
 

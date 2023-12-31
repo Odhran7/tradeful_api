@@ -17,24 +17,34 @@ const homeownerRouter = express.Router();
  *           schema:
  *             type: object
  *             required:
- *               - firstName
- *               - lastName
- *               - email
+ *               - userId
+ *               - propertyDetails
  *             properties:
- *               firstName:
+ *               userId:
  *                 type: string
- *               lastName:
- *                 type: string
- *               email:
- *                 type: string
- *               address:
- *                 type: string
+ *               propertyDetails:
+ *                 type: object
+ *                 required:
+ *                   - type
+ *                   - size
+ *                   - location
+ *                   - isBusiness
+ *                 properties:
+ *                   type:
+ *                     type: string
+ *                   size:
+ *                     type: string
+ *                   location:
+ *                     type: string
+ *                   isBusiness:
+ *                     type: boolean
  *     responses:
  *       201:
  *         description: Homeowner created successfully
  *       400:
  *         description: Invalid input
  */
+
 homeownerRouter.post("/homeowner", homeownerController.createHomeowner);
 
 /**
@@ -53,9 +63,28 @@ homeownerRouter.post("/homeowner", homeownerController.createHomeowner);
  *     responses:
  *       200:
  *         description: Homeowner data retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 userId:
+ *                   type: string
+ *                 propertyDetails:
+ *                   type: object
+ *                   properties:
+ *                     type:
+ *                       type: string
+ *                     size:
+ *                       type: string
+ *                     location:
+ *                       type: string
+ *                     isBusiness:
+ *                       type: boolean
  *       404:
  *         description: Homeowner not found
  */
+
 homeownerRouter.get("/homeowner/:id", homeownerController.getHomeownerById);
 
 /**
@@ -78,14 +107,17 @@ homeownerRouter.get("/homeowner/:id", homeownerController.getHomeownerById);
  *           schema:
  *             type: object
  *             properties:
- *               firstName:
- *                 type: string
- *               lastName:
- *                 type: string
- *               email:
- *                 type: string
- *               address:
- *                 type: string
+ *               propertyDetails:
+ *                 type: object
+ *                 properties:
+ *                   type:
+ *                     type: string
+ *                   size:
+ *                     type: string
+ *                   location:
+ *                     type: string
+ *                   isBusiness:
+ *                     type: boolean
  *     responses:
  *       200:
  *         description: Homeowner updated successfully
