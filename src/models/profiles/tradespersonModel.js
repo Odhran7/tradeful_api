@@ -30,6 +30,10 @@ const tradespersonSchema = new mongoose.Schema({
     type: [String],
     required: true,
   },
+  available: {
+    type: Boolean,
+    required: false,
+  }
 });
 
 const TradespersonModel = mongoose.model('Tradesperson', tradespersonSchema);
