@@ -2,7 +2,7 @@
 
 import { logger } from "../../../../config/index.js";
 import { validateHomeowner } from "../../../../utils/validators/index.js";
-import { HomeownerModel } from "../../../../models/profiles/index.js";
+import { HomeownerModel } from "../../../../models/index.js";
 
 // Helper function for creating a homeowner
 const createHomeowner = async (userId, propertyDetails) => {

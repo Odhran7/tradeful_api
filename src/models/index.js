@@ -3,14 +3,15 @@
 import HomeownerModel from './profiles/homeownerModel.js';
 import TradespersonModel from './profiles/tradespersonModel.js';
 import UserModel from './profiles/userModel.js';
-import ReviewModel from './reviews/reviewModel.js';
-import BookingModel from './booking/bookingModel.js';
+import JobModel from './jobs/jobModel.js';
+import PaymentInfoModel from './payments/paymentInfoModel.js';
+
 
 
 export {
     HomeownerModel,
     TradespersonModel,
     UserModel,
-    ReviewModel,
-    BookingModel, 
+    JobModel,
+    PaymentInfoModel,
 }

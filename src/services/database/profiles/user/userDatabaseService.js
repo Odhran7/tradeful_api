@@ -1,5 +1,5 @@
 // This is the database schema related to the user model.
-import { UserModel, HomeownerModel, TradespersonModel } from '../../../../models/profiles/index.js';
+import { UserModel, HomeownerModel, TradespersonModel } from '../../../../models/index.js';
 import { logger } from '../../../../config/index.js';
 import hashPassword from '../../../../utils/auth/hash.js';
 import { validateUser } from '../../../../utils/validators/index.js';

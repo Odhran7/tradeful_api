@@ -3,9 +3,11 @@
 import tradesmanDatabaseService from './profiles/tradesmen/tradesmanDatabaseService.js';
 import homeownerDatabaseService from './profiles/homeowner/homeownerDatabaseService.js';
 import userDatabaseService from './profiles/user/userDatabaseService.js';
+import jobDatabaseService from './jobs/jobDatabaseService.js';
 
 export {
     tradesmanDatabaseService,
     homeownerDatabaseService,
     userDatabaseService,
+    jobDatabaseService,
 }

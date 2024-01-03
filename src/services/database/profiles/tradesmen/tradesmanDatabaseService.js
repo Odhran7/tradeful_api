@@ -1,7 +1,7 @@
 // This is the database service related to the tradesman model.
 
 import { validateTradesperson } from "../../../../utils/validators/index.js";
-import { TradespersonModel, UserModel } from "../../../../models/profiles/index.js";
+import { TradespersonModel, UserModel } from "../../../../models/index.js";
 import { logger } from "../../../../config/index.js";
 
 // Helper function for creating a tradesman

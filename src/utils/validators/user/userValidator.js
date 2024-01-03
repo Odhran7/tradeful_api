@@ -1,3 +1,4 @@
+// This is a validator for the user model.
 import validator from 'validator';
 import { logger } from '../../../config/index.js';
 

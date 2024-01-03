@@ -2,9 +2,9 @@
 
 import mongoose from 'mongoose';
 import { logger } from '../../config/index.js';
-import { UserModel } from '../../models/profiles/index.js';
-import { TradespersonModel } from '../../models/profiles/index.js';
-import { HomeownerModel } from '../../models/profiles/index.js';
+import { UserModel } from '../../models/index.js';
+import { TradespersonModel } from '../../models/index.js';
+import { HomeownerModel } from '../../models/index.js';
 import dotenv from '../../config/envConfig.js';
 
 const resetDb = async () => {
