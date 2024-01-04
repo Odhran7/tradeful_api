@@ -6,10 +6,11 @@ const tradesmanRouter = express.Router();
 
 /**
  * @swagger
- * /tradesman:
+ * /api/user/tradesman:
  *   post:
  *     summary: Create a new tradesman
  *     description: Adds a new tradesman to the database.
+ *     tags: [Tradesperson]
  *     requestBody:
  *       required: true
  *       content:
@@ -43,14 +44,15 @@ const tradesmanRouter = express.Router();
  *       400:
  *         description: Invalid input
  */
-tradesmanRouter.post("/tradesman", tradesmanController.createTradesman);
+tradesmanRouter.post("/", tradesmanController.createTradesman);
 
 /**
  * @swagger
- * /tradesman/{id}:
+ * /api/user/tradesman/{id}:
  *   get:
  *     summary: Get a tradesman by ID
  *     description: Retrieves a tradesman from the database by their unique ID.
+ *     tags: [Tradesperson]
  *     parameters:
  *       - in: path
  *         name: id
@@ -83,14 +85,15 @@ tradesmanRouter.post("/tradesman", tradesmanController.createTradesman);
  *       404:
  *         description: Tradesman not found
  */
-tradesmanRouter.get("/tradesman/:id", tradesmanController.getTradesmanById);
+tradesmanRouter.get("/:id", tradesmanController.getTradesmanById);
 
 /**
  * @swagger
- * /tradesman/{id}:
+ * /api/user/tradesman/{id}:
  *   put:
  *     summary: Update a tradesman by ID
  *     description: Modifies tradesman information in the database.
+ *     tags: [Tradesperson]
  *     parameters:
  *       - in: path
  *         name: id
@@ -125,7 +128,7 @@ tradesmanRouter.get("/tradesman/:id", tradesmanController.getTradesmanById);
  *       404:
  *         description: Tradesman not found
  */
-tradesmanRouter.put("/tradesman/:id", tradesmanController.updateTradesmanById);
+tradesmanRouter.put("/:id", tradesmanController.updateTradesmanById);
 
 
 export default tradesmanRouter;

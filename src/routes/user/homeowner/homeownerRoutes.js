@@ -6,10 +6,11 @@ const homeownerRouter = express.Router();
 
 /**
  * @swagger
- * /homeowner:
+ * /api/user/homeowner:
  *   post:
  *     summary: Create a new homeowner
  *     description: Adds a new homeowner to the database.
+ *     tags: [Homeowners]
  *     requestBody:
  *       required: true
  *       content:
@@ -45,14 +46,15 @@ const homeownerRouter = express.Router();
  *         description: Invalid input
  */
 
-homeownerRouter.post("/homeowner", homeownerController.createHomeowner);
+homeownerRouter.post("/", homeownerController.createHomeowner);
 
 /**
  * @swagger
- * /homeowner/{id}:
+ * /api/user/homeowner/{id}:
  *   get:
  *     summary: Get a homeowner by ID
  *     description: Retrieves a homeowner from the database by their unique ID.
+ *     tags: [Homeowners]
  *     parameters:
  *       - in: path
  *         name: id
@@ -85,14 +87,15 @@ homeownerRouter.post("/homeowner", homeownerController.createHomeowner);
  *         description: Homeowner not found
  */
 
-homeownerRouter.get("/homeowner/:id", homeownerController.getHomeownerById);
+homeownerRouter.get("/:id", homeownerController.getHomeownerById);
 
 /**
  * @swagger
- * /homeowner/{id}:
+ * /api/user/homeowner/{id}:
  *   put:
  *     summary: Update a homeowner by ID
  *     description: Modifies homeowner information in the database.
+ *     tags: [Homeowners]
  *     parameters:
  *       - in: path
  *         name: id
@@ -126,7 +129,7 @@ homeownerRouter.get("/homeowner/:id", homeownerController.getHomeownerById);
  *       404:
  *         description: Homeowner not found
  */
-homeownerRouter.put("/homeowner/:id", homeownerController.updateHomeownerById);
+homeownerRouter.put("/:id", homeownerController.updateHomeownerById);
 
 
 export default homeownerRouter;

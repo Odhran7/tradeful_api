@@ -6,6 +6,6 @@ import express from 'express';
 const profileRoutes = express.Router();
 profileRoutes.use('/homeowner', homeownerRoutes);
 profileRoutes.use('/tradesman', tradesmanRouter);
-profileRoutes.use('/user', userRouter);
+profileRoutes.use('/', userRouter);
 
 export default profileRoutes;

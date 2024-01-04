@@ -9,10 +9,11 @@ const authRoutes = express.Router();
 
 /**
  * @swagger
- * /login-email:
+ * /api/auth/login-email:
  *   post:
  *     summary: Login with Email
  *     description: Log in to the system using an email and password.
+ *     tags: [Auth]
  *     requestBody:
  *       required: true
  *       content:
@@ -42,10 +43,11 @@ authRoutes.post('/login-email', emailLoginAuthContoller);
 
 /**
  * @swagger
- * /login-phone-number:
+ * /api/auth/login-phone-number:
  *   post:
  *     summary: Login with Phone Number
  *     description: Log in to the system using a phone number and password.
+ *     tags: [Auth]
  *     requestBody:
  *       required: true
  *       content:

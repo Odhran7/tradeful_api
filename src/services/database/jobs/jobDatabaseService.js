@@ -76,6 +76,17 @@ const getAllPendingJobsByServiceType = async (serviceType) => {
     }
 }
 
+// Gets all jobs with status completed
+const getAllCompletedJobs = async () => {
+    try {
+        const jobs = await JobModel.find({ jobStatus: 'completed' }).sort({ jobCreationDate: -1 })
+        return jobs;
+    } catch (error) {
+        logger.error("Error getting all jobs with status completed: " + error.message);
+        throw error;
+    }
+};
+
 // Setters
 
 // Updates job items by id
@@ -177,6 +188,21 @@ const updateJobTradespersonById = async (jobId, jobTradesperson) => {
     }
 }
 
+// Update job
+
+const updateJobById = async (jobId, jobDetails) => {
+    try {
+        const job = await findJobHomeownerById(jobId);
+        const newJob = await JobModel.findByIdAndUpdate(jobId, {
+            ...jobDetails
+        }, { new: true });
+        return job;
+    } catch (error) {
+        logger.error("Error updating job by id: " + error.message);
+        throw error;
+    }
+}
+
 
 // Delete job by id
 
@@ -198,12 +224,14 @@ const jobDatabaseService = {
     getTopXJobs,
     getAllPendingJobs,
     getAllPendingJobsByServiceType,
+    getAllCompletedJobs,
     updateJobTitleById,
     updateJobDescriptionById,
     updateJobQuoteById,
     updateJobStatusById,
     updateJobUrgencyById,
     updateJobTradespersonById,
+    updateJobById,
     deleteJobById,
 };
 

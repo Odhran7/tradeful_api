@@ -7,10 +7,11 @@ const homeownerAuthRouter = express.Router();
 
 /**
  * @swagger
- * /register-homeowner:
+ * /api/auth/homeowner/register-homeowner:
  *   post:
  *     summary: Register a new homeowner
  *     description: This endpoint registers a new homeowner in the system.
+ *     tags: [Auth]
  *     requestBody:
  *       required: true
  *       content:

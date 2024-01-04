@@ -7,10 +7,11 @@ const tradespersonAuthRouter = express.Router();
 
 /**
  * @swagger
- * /register-tradesperson:
+ * /api/auth/tradesperson/register-tradesperson:
  *   post:
  *     summary: Register a new tradesperson
  *     description: This endpoint registers a new tradesperson in the system.
+ *     tags: [Auth]
  *     requestBody:
  *       required: true
  *       content:
