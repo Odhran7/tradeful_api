@@ -227,6 +227,7 @@ const checkPhoneNumber = async (phoneNumber) => {
   }
   return false;
 };
+
 // This function checks for the presence of an existing first and last name
 const checkFirstLastName = async (firstName, lastName) => {
   try {

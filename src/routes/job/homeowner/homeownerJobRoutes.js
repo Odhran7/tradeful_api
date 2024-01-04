@@ -74,7 +74,6 @@ const homeownerJobRouter = express.Router();
  *       500:
  *         description: Internal server error
  */
-
 homeownerJobRouter.post("/:userId", homeownerJobController.homeownerCreateJob);
 
 /**
@@ -119,7 +118,7 @@ homeownerJobRouter.put("/title/:jobId", homeownerJobController.homeownerUpdateJo
 
 /**
  * @swagger
- * /api/job/homeowner/title/{jobId}:
+ * /api/job/homeowner/description/{jobId}:
  *   put:
  *     summary: Update job description
  *     description: Allows a homeowner to update the description of an existing job.
@@ -159,7 +158,7 @@ homeownerJobRouter.put("/description/:jobId", homeownerJobController.homeownerUp
 
 /**
  * @swagger
- * /api/job/homeowner/title/{jobId}:
+ * /api/job/homeowner/quote/{jobId}:
  *   put:
  *     summary: Update job quote
  *     description: Allows a homeowner to update the quote of an existing job.
@@ -199,9 +198,9 @@ homeownerJobRouter.put("/quote/:jobId", homeownerJobController.homeownerUpdateJo
 
 /**
  * @swagger
- * /api/job/homeowner/job/title/{jobId}:
+ * /api/job/homeowner/urgency/{jobId}:
  *   put:
- *     summary: Update job status
+ *     summary: Update job urgency
  *     description: Allows a homeowner to update the urgency of an existing job.
  *     tags: [Homeowner Jobs]
  *     parameters:
@@ -239,7 +238,7 @@ homeownerJobRouter.put("/urgency/:jobId", homeownerJobController.homeownerUpdate
 
 /**
  * @swagger
- * /api/job/homeowner/job/{jobId}:
+ * /api/job/homeowner/{jobId}:
  *   put:
  *     summary: Update an existing job
  *     description: Allows a homeowner to update the details of an existing job.
@@ -333,7 +332,7 @@ homeownerJobRouter.put("/:jobId", homeownerJobController.homeownerUpdateJob);
 
 /**
  * @swagger
- * /api/job/homeowner/job/{userId}:
+ * /api/job/homeowner/{userId}:
  *   get:
  *     summary: Retrieve all jobs posted by a homeowner
  *     description: Fetches a list of all jobs associated with a specific homeowner's user ID.
@@ -362,6 +361,38 @@ homeownerJobRouter.put("/:jobId", homeownerJobController.homeownerUpdateJob);
  *         description: Internal server error
  */
 homeownerJobRouter.get("/:userId", homeownerJobController.homeownerGetAllJobs);
+
+/**
+ * @swagger
+ * /api/job/homeowner/{jobId}:
+ *   delete:
+ *     summary: Delete a job
+ *     description: Allows a homeowner to delete a job by its unique ID.
+ *     tags: [Homeowner Jobs]
+ *     parameters:
+ *       - in: path
+ *         name: jobId
+ *         required: true
+ *         description: Unique ID of the job to be deleted
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Job deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Job deleted successfully
+ *       404:
+ *         description: Job not found
+ *       500:
+ *         description: Internal server error
+ */
+homeownerJobRouter.delete("/:jobId", homeownerJobController.homeownerDeleteJob);
 
 
 export default homeownerJobRouter;

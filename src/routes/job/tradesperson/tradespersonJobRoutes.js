@@ -172,4 +172,74 @@ tradespersonJobRouter.put("/status/:jobId", tradespersonJobController.tradespers
  */
 tradespersonJobRouter.get('/:service', tradespersonJobController.tradespersonGetAllServiceJobs);
 
+/**
+ * @swagger
+ * /api/job/tradesperson/:userId:
+ *   get:
+ *     summary: Retrieve jobs associated with a specific tradesperson
+ *     description: Fetches a list of all jobs assigned to a given tradesperson by their user ID.
+ *     tags: [Tradesperson Jobs]
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         required: true
+ *         description: Unique ID of the tradesperson
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: List of jobs for the specified tradesperson
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: 'src/models/JobModel.js'
+ *       404:
+ *         description: Tradesperson not found
+ *       500:
+ *         description: Internal server error
+ */
+tradespersonJobRouter.get(':userId', tradespersonJobController.getJobsTradesperson);
+
+/**
+ * @swagger
+ * /api/job/tradesperson/quote/{jobId}:
+ *   put:
+ *     summary: Update the quote for a job
+ *     description: Allows a tradesperson to update the quote for a specific job.
+ *     tags: [Tradesperson Jobs]
+ *     parameters:
+ *       - in: path
+ *         name: jobId
+ *         required: true
+ *         description: Unique ID of the job
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - jobQuote
+ *             properties:
+ *               jobQuote:
+ *                 type: number
+ *                 example: 300
+ *     responses:
+ *       200:
+ *         description: Job quote updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: 'src/models/JobModel.js'
+ *       404:
+ *         description: Job not found
+ *       500:
+ *         description: Internal server error
+ */
+tradespersonJobRouter.put('/quote/:jobId', tradespersonJobController.tradespersonUpdateJobQuote);
+
 export default tradespersonJobRouter;

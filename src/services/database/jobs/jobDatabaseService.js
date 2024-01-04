@@ -4,11 +4,15 @@ import { logger } from "../../../config/index.js";
 import { validateJob } from '../../../utils/validators/index.js';
 import { JobModel } from "../../../models/index.js";
 import { userDatabaseService } from '../index.js';
+import mongoose from "mongoose";
 
 // Helper function for creating a job
 const createJobHomeowner = async (userId, jobDetails) => {
     try {
         const homeowner = await userDatabaseService.getUserById(userId);
+        if (homeowner.role !== 'homeowner') {
+            throw new Error("User is not a homeowner");
+        };
         validateJob(...Object.values(jobDetails), homeowner);
         const job = new JobModel({ ...jobDetails, jobHomeowner: homeowner });
         await job.save();
@@ -32,16 +36,17 @@ const findJobHomeownerById = async (jobId) => {
     }
 }
 
-// Gets a job by homneowner id
+// Gets jobs by homneowner id
 const findJobHomeownerByHomeownerId = async (userId) => {
     try {
-        const jobs = await JobModel.find({ 'jobHomeowner._id': userId });
+        const jobs = await JobModel.find({ 'jobHomeowner': userId });
         return jobs;
     } catch (error) {
         logger.error("Error finding jobs by homeowner id: " + error.message);
         throw error;
     }
 }
+
 
 // Gets top x jobs that are pending
 const getTopXJobs = async (x) => {
@@ -127,7 +132,7 @@ const updateJobQuoteById = async (jobId, jobQuote) => {
         const job = await findJobHomeownerById(jobId);
         const newJob = await JobModel.findByIdAndUpdate(jobId, {
             jobQuote,
-        });
+        }, { new: true });
         return newJob;
     } catch (error) {
         logger.error("Error updating job quote by id: " + error.message);
@@ -146,7 +151,7 @@ const updateJobStatusById = async (jobId, jobStatus) => {
         const job = await findJobHomeownerById(jobId);
         const newJob = await JobModel.findByIdAndUpdate(jobId, {
             jobStatus,
-        });
+        }, { new: true });
         return newJob;
     } catch (error) {
         logger.error("Error updating job status by id: " + error.message);
@@ -178,6 +183,10 @@ const updateJobUrgencyById = async (jobId, jobUrgency) => {
 const updateJobTradespersonById = async (jobId, jobTradesperson) => {
     try {
         // Ensure the updated job is returned
+        const tradesperson = await userDatabaseService.getUserById(jobTradesperson);
+        if (tradesperson.role !== 'tradesperson') {
+            throw new Error("User is not a tradesperson");
+        }
         const updatedJob = await JobModel.findByIdAndUpdate(jobId, {
             jobTradesperson
         }, { new: true }); // Get the updated document
@@ -209,7 +218,10 @@ const updateJobById = async (jobId, jobDetails) => {
 const deleteJobById = async (jobId) => {
     try {
         const job = await findJobHomeownerById(jobId);
-        const newJob = await JobModel.findByIdAndDelete(jobId);
+        if (!job) {
+            throw new Error("Job not found");
+        }
+        await JobModel.findByIdAndDelete(jobId);
         return jobId;
     } catch (error) {
         logger.error("Error deleting job by id: " + error.message);

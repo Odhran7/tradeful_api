@@ -1,7 +1,7 @@
 // These are the routes for the tradesperson auth routes (local)
 
 import express from "express";
-import { registerHomeOwnerController } from "../../../controllers/auth/index.js";
+import { registerTradespersonController } from "../../../controllers/auth/index.js";
 
 const tradespersonAuthRouter = express.Router();
 
@@ -10,7 +10,7 @@ const tradespersonAuthRouter = express.Router();
  * /api/auth/tradesperson/register-tradesperson:
  *   post:
  *     summary: Register a new tradesperson
- *     description: This endpoint registers a new tradesperson in the system.
+ *     description: Allows for the creation of a new tradesperson account.
  *     tags: [Auth]
  *     requestBody:
  *       required: true
@@ -21,8 +21,11 @@ const tradespersonAuthRouter = express.Router();
  *             required:
  *               - firstName
  *               - lastName
+ *               - phoneNumber
+ *               - address
  *               - email
  *               - password
+ *               - role
  *               - tradeType
  *               - businessName
  *               - skills
@@ -30,33 +33,42 @@ const tradespersonAuthRouter = express.Router();
  *             properties:
  *               firstName:
  *                 type: string
- *                 description: First name of the tradesperson
+ *                 example: Jane
  *               lastName:
  *                 type: string
- *                 description: Last name of the tradesperson
+ *                 example: Doe
+ *               phoneNumber:
+ *                 type: string
+ *                 example: "1234567890"
+ *               address:
+ *                 type: string
+ *                 example: "456 Side St, Townville"
  *               email:
  *                 type: string
- *                 description: Email address of the tradesperson
+ *                 example: janedoe@example.com
  *               password:
  *                 type: string
  *                 format: password
- *                 description: Password for the tradesperson's account
+ *                 example: "strongpassword123"
+ *               role:
+ *                 type: string
+ *                 example: tradesperson
  *               tradeType:
  *                 type: string
- *                 description: Type of trade the tradesperson specializes in
+ *                 example: plumbing
  *               businessName:
  *                 type: string
- *                 description: Name of the tradesperson's business
+ *                 example: "Jane's Plumbing"
  *               skills:
  *                 type: array
  *                 items:
  *                   type: string
- *                 description: List of skills possessed by the tradesperson
+ *                 example: ["pipe installation", "leak repair"]
  *               qualifications:
  *                 type: array
  *                 items:
  *                   type: string
- *                 description: List of qualifications of the tradesperson
+ *                 example: ["Certified Plumber", "5 years experience"]
  *     responses:
  *       201:
  *         description: Tradesperson registered successfully
@@ -66,12 +78,12 @@ const tradespersonAuthRouter = express.Router();
  *               type: object
  *               properties:
  *                 tradesperson:
- *                   $ref: '#/models/Tradesperson'
+ *                   $ref: '#/components/schemas/TradespersonModel'
  *       400:
  *         description: Invalid input
  *       500:
- *         description: Error occurred during registration
+ *         description: Internal server error
  */
-tradespersonAuthRouter.post("/register-tradesperson", registerHomeOwnerController);
+tradespersonAuthRouter.post("/register-tradesperson", registerTradespersonController);
 
 export default tradespersonAuthRouter;

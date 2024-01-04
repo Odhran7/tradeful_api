@@ -10,7 +10,7 @@ const homeownerAuthRouter = express.Router();
  * /api/auth/homeowner/register-homeowner:
  *   post:
  *     summary: Register a new homeowner
- *     description: This endpoint registers a new homeowner in the system.
+ *     description: Allows for the creation of a new homeowner account.
  *     tags: [Auth]
  *     requestBody:
  *       required: true
@@ -21,33 +21,50 @@ const homeownerAuthRouter = express.Router();
  *             required:
  *               - firstName
  *               - lastName
+ *               - phoneNumber
+ *               - address
  *               - email
  *               - password
+ *               - role
+ *               - propertyDetails
  *             properties:
  *               firstName:
  *                 type: string
- *                 description: First name of the homeowner
+ *                 example: John
  *               lastName:
  *                 type: string
- *                 description: Last name of the homeowner
+ *                 example: Doe
+ *               phoneNumber:
+ *                 type: string
+ *                 example: "1234567890"
+ *               address:
+ *                 type: string
+ *                 example: "123 Main St, Cityville"
  *               email:
  *                 type: string
- *                 description: Email address of the homeowner
+ *                 example: johndoe@example.com
  *               password:
  *                 type: string
  *                 format: password
- *                 description: Password for the homeowner's account
+ *                 example: "Password123!"
+ *               role:
+ *                 type: string
+ *                 example: homeowner
  *               propertyDetails:
  *                 type: object
  *                 properties:
  *                   type:
  *                     type: string
+ *                     example: Apartment
  *                   size:
  *                     type: string
+ *                     example: "1200 sqft"
  *                   location:
  *                     type: string
+ *                     example: "123 Main St, Cityville"
  *                   isBusiness:
  *                     type: boolean
+ *                     example: false
  *     responses:
  *       201:
  *         description: Homeowner registered successfully
@@ -57,11 +74,11 @@ const homeownerAuthRouter = express.Router();
  *               type: object
  *               properties:
  *                 homeOwner:
- *                   $ref: '#/models/Homeowner'
+ *                   $ref: '#/components/schemas/HomeownerModel'
  *       400:
  *         description: Invalid input
  *       500:
- *         description: Error occurred during registration
+ *         description: Internal server error
  */
 homeownerAuthRouter.post("/register-homeowner", registerHomeOwnerController);
 
